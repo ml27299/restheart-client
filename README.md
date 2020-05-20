@@ -1,5 +1,5 @@
 # Introduction
-Restheart is a popular mongo rest api, this package aims to make it easier to use by abstracting the endpoints to mongoose-like methods.
+[Restheart](https://restheart.org/) is a popular mongo rest api, this package aims to make it easier to use by abstracting the endpoints to mongoose-like methods.
 
 This package also aims to optimize working with Restheart by
 - automated timeout/retry handling
