@@ -9,9 +9,38 @@ This package also aims to optimize working with Restheart by
 - add methods like limit/skip
 - ability to get all records from a collection
 
+Limitations
+- Only supports jwt auth Restheart deployments
+- Only supports Restheart V3, this is because Restheart v4 and above requires a paid plan to use jwt authentication
+
+Future features
+- More authentication options
+- Support for Restheart V4 and V5
+
 Supports >=node@4.x.x
 
 ## Getting started
+In case you want to configure jwt auth mechanism in Restheart V3
+
+restheart.yml
+```yaml
+auth-mechanism:
+  implementation-class: org.restheart.security.impl.JwtAuthenticationManagerFactory
+  algorithm: HS256
+  key: secret
+  base64Encoded: false
+  usernameClaim: sub
+  rolesClaim: roles
+  issuer: myIssuer
+  audience: myAudience
+```
+
+config.properties
+```yaml
+auth-token-enabled = true
+auth-token-ttl = 15
+```
+
 ### Options
 options can be passed in on all levels of the package
 - **noPageLimit(bool | default = false):** set a no page limit so that you get all records from collection (does a series of requests using the pagesize as its limit for each request)
