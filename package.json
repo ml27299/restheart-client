@@ -3,6 +3,13 @@
 	"version": "1.0.0",
 	"description": "lib made for restheart to use it more easily",
 	"main": "dist/index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ml27299/restheart-client"
+	},
+	"engines": {
+		"node": ">=4.0.0"
+	},
 	"scripts": {
 		"build:prod": "rm -rf ./dist && webpack --mode production",
 		"build:dev": "rm -rf ./dist && webpack --mode development --watch",
