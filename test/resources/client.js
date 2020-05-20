@@ -1,7 +1,7 @@
-import MongooseClient from "mongoose-client";
+import RestHeartClient from "restheart-client";
 import token from "./restheart/token";
 
-const client = new MongooseClient({
+const client = new RestHeartClient({
     token,
     database: "test",
     baseUrl: "http://localhost:5151"
