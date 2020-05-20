@@ -76,7 +76,45 @@ Supported sub-methods
 - [limit](#limitnum--number-default--0)
 - [skip](#skipnum--number-default--0)
 - [sort](#sortval--)
+- [page](#pagenum--number-default--1)
 - [noPageLimit](#nopagelimitval--true--false-default-true)
+
+### create(document = object | array, [options](#options){})
+This method creates a record or a list of records in a target collection
+```javascript
+(async () => {
+    const response = await MyCollection.create({field1: "someValue"}).catch(err => {
+        /*...do something on error*/
+    });
+    console.log(response) //{_id: "someObjectId", field1: "someValue"}
+    /*...do something with the response*/
+})();
+```
+Supported sub-methods
+- [raw](#rawval--true--false-default--true)
+
+### update(query = object | array, document{}, [options](#options){})
+This method updates a record or a list of records in a target collection.
+If query is an array, then a bulk update will be done, which means each record in the array MUST contain the _id 
+```javascript
+(async () => {
+    await MyCollection.update({field1: "someValue"}, {"$set": {field1: "otherValue"}}).catch(err => {
+        /*...do something on error*/
+    });
+    //alternatively
+    await MyCollection.update({field1: "someValue"}, {field1: "otherValue"}).catch(err => {
+        /*...do something on error*/    
+    });
+    //alternatively
+    await MyCollection.update([{_id: "someObjectId", field1: "otherValue"}]).catch(err => {
+        /*...do something on error*/    
+    });
+})();
+```
+Supported sub-methods
+- none
+
+
 ## Sub-Methods (examples in async/await but promises work too)
 sub-methods can be chained
 
@@ -119,6 +157,13 @@ Call the sort method when you want to return the records sorted by some field
 ```javascript
 (async () => {
     await MyCollection.find().sort({field: 1}); //ascending order
+})();
+```
+### page(num = number default = 1)
+Call the page method when you want to control which page to return
+```javascript
+(async () => {
+    await MyCollection.find().page(5); //assuming pagesize = 100, returns results 400-500
 })();
 ```
 ### noPageLimit(val = (true | false) default true)

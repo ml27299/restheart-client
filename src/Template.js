@@ -160,10 +160,15 @@ class Template {
             document: deserialize(document, Object.assign({}, this.options, options))
         }, options);
 
+        const supported = {
+            raw: 1
+        };
+
         return new Model({
             params,
             options: Object.assign({}, this.options, options),
             name: "create",
+            supported,
             resolver: async (options = {}, params = required`params`) => {
                 log({options, params});
                 try {
@@ -200,9 +205,7 @@ class Template {
             name: "update",
             resolver: async (options = {}, params = required`params`) => {
                 try {
-                    let response = await connection.update(params);
-                    if (!options.raw && response) response = serialize(response, options);
-                    return response;
+                    return await connection.update(params);
                 } catch (err) {
                     throw(err);
                 }
