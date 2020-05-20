@@ -4,9 +4,9 @@ node_js:
 
 services:
   - docker
-
+  - mongodb
 before_script:
-  - docker-compose up -d
+  - docker-compose up
   - npm link
   - npm link restheart-client
   - npm run build:prod
