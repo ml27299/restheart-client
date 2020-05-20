@@ -74,7 +74,7 @@ Supported sub-methods
 - [select](#selectval--string--object)
 - [raw](#rawval--true--false-default--true)
 
-## Sub-Methods
+## Sub-Methods (examples in async/await but promises work too)
 ### raw(val = (true | false) default = true)
 Call the raw method when you want to return the response without serialization, which means objectids look like {"$oid": "someObjectId"}
 ```javascript
