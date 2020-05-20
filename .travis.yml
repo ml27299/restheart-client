@@ -5,6 +5,7 @@ node_js:
 services:
   - docker
   - mongodb
+
 before_script:
   - docker-compose up
   - npm link
