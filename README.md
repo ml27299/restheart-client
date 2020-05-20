@@ -40,7 +40,7 @@ client.getModels().then(({mycollection: MyCollection}) => {
 
 ### client.getModel(name, options{})
 This method targets a collection explicitly
-- (Required) name: The name of the collection you want to target
+- (Required) name(string): The name of the collection you want to target
 - options(object):
     - noPageLimit(bool | default = false): set a no page limit so that you get all records from collection (does a series of requests using the pagesize as its limit for each request)
     - pagesize(number | default = 100): set the max number of records the client will get at once
