@@ -93,6 +93,29 @@ describe('find', function () {
                 }).catch(done);
             }).catch(done);
         });
+        it('should get 200 record from bigtestcollection', function (done) {
+            BigTestCollection.find().limit(200).then(response => {
+                try {
+                    assert.deepStrictEqual(response.length, 200);
+                    done();
+                } catch (err) {
+                    done(err);
+                }
+            }).catch(done);
+        });
+        it('should get 200 record after skipping 101 rec from bigtestcollection', function (done) {
+            BigTestCollection.find().page(2).then(list => {
+                BigTestCollection.find().limit(200).skip(101).then(response => {
+                    try {
+                        assert.deepStrictEqual(response.length, 200);
+                        assert.deepStrictEqual(list[1], response[0], "skip mismatch");
+                        done();
+                    } catch (err) {
+                        done(err);
+                    }
+                }).catch(done);
+            }).catch(done);
+        });
     });
     describe("skip", function () {
         it('should skip 1 record from testcollection', function (done) {

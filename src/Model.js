@@ -47,11 +47,13 @@ class Model {
     }
 
     limit(num = 0) {
-        if (this.options.pagesize < num) throw("limit cannot be greater than pagesize");
         try {
             if (this.isSupported("limit")) {
                 this.options.limit = num;
-                this.params.pagesize = num || this.options.pagesize;
+                if(num > this.options.pagesize) {
+                    this.params.pagesize = this.options.pagesize;
+                    this.options.noPageLimit = true;
+                }else this.params.pagesize =  num || this.options.pagesize;
                 if (this.options.skip) return this.skip(this.options.skip);
                 return this;
             }
