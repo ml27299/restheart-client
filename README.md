@@ -16,7 +16,7 @@ options can be passed in on all levels of the package
     - **updated_at(bool | number | string default = true):** sets a updated_at timestamp when a record is created or updated, you can change the name of the field by providing a string instead of a bool or number 
 
 ### RestHeartClient(params{})
-- params:
+- **params:**
     - **token(string):** used to authenticate to restheart
     - **(Required) baseUrl(string):** the url to where restheart is exposed
     - **database(string | default = "http://localhost"):** the name of the database in restheart you want to target
