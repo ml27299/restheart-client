@@ -7,6 +7,7 @@ services:
   - mongodb
 
 before_script:
+  - sleep 15
   - docker-compose up
   - npm link
   - npm link restheart-client
