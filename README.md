@@ -46,7 +46,7 @@ const MyCollection = client.getModel("mycollection");
 /*...do stuff with MyCollection*/
 ```
 ## Methods (examples in async/await but promises work too)
-### findOne(query{}, [options](#options){})
+### findOne(query{}, [options](#options){}) (can be chained with sub-methods)
 This method returns a single record from a collection
 ```javascript
 (async () => {
@@ -56,36 +56,10 @@ This method returns a single record from a collection
     /*...do something with the response*/
 })();
 ```
-#### raw(val = (true | false) default = true)
-Chain findOne with raw to return the record without any serialization
-```javascript
-(async () => {
-    await MyCollection.findOne({_id: "someObjectId"}).raw().catch(err => {
-        /*...do something on error*/
-    });
-    /*...do something with the response*/
-})();
-```
-#### select(val = string | object)
-Chain findOne with select to return the record with only certain fields
-```javascript
-(async () => {
-    await MyCollection.findOne({_id: "someObjectId"}).select({field1: 1, field2: 1}).catch(err => {
-        /*...do something on error*/
-    });
-    /*...do something with the response*/
-})();
-```
-can also chain with raw
+Supported sub-methods
+- [select](#selectval--string--object)
+- [raw](#rawval--true--false-default--true)
 
-```javascript
-(async () => {
-    await MyCollection.findOne({_id: "someObjectId"}).select({field1: 1, field2: 1}).raw().catch(err => {
-        /*...do something on error*/
-    });
-    /*...do something with the response*/
-})();
-```
 ### find(query{}, [options](#options){})
 This method returns a list of records from a collection
 ```javascript
@@ -96,24 +70,34 @@ This method returns a list of records from a collection
     /*...do something with the response*/
 })();
 ```
+Supported sub-methods
+- [select](#selectval--string--object)
+- [raw](#rawval--true--false-default--true)
 
-#### raw(val = (true | false) default = true)
-Chain findOne with raw to return the record without any serialization
+## Sub-Methods
+### raw(val = (true | false) default = true)
+Call the raw method when you want to return the response without serialization, which means objectids look like {"$oid": "someObjectId"}
 ```javascript
 (async () => {
-    await MyCollection.find().raw().catch(err => {
-        /*...do something on error*/
-    });
-    /*...do something with the response*/
+    const response = await MyCollection.findOne().raw();
+    console.log(response); //{_id: {"$oid": "someObjectId"}, ...}
 })();
 ```
-#### select(val = string | object)
-Chain findOne with select to return the record with only certain fields
+### select(val = string | object)
+Call the select method when you want select fields only (_id is always returned no matter what)
 ```javascript
 (async () => {
-    await MyCollection.find().select({field1: 1, field2: 1}).catch(err => {
-        /*...do something on error*/
-    });
-    /*...do something with the response*/
+    const response = await MyCollection.find().select("field1 field2"); 
+    console.log(response); //[{_id: "someObjectId", field1: "someVal", field2: "otherValue"}  ...}]
+    //alternatively
+    await MyCollection.find().select({field1: 1, field2: 1});
+})();
+```
+### skip(num = number default = 0)
+Call the skip method to control where restheart begins returning results.
+If there're more rows in a collection than the set "pagesize" then the skip method will make multiple calls (each call less than or equal to the set "pagesize") to respond with the set "pagesize".
+```javascript
+(async () => {
+    await MyCollection.find().skip(10);
 })();
 ```
