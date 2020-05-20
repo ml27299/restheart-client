@@ -1,11 +1,11 @@
-#Introduction
+# Introduction
 Restheart is a popular mongo rest api, this package aims to make it easier to use by abstracting the endpoints to mongoose-like methods.
 
 This package also aims to optimize working with Restheart by providing automatic timeout and retry handling.
 
 Supports >=node@4.x.x
 
-##Getting started
+## Getting started
 RestHeartClient(params{})
 - params:
     - token(string): used to authenticate to restheart
@@ -26,7 +26,7 @@ const client = new RestHeartClient({
 });
 ```
 
-###client.getModels(options{})
+### client.getModels(options{})
 This method implicitly figures out the collections in your database by making a request to restheart
 - options(object): options passed in will be used for every collection found
     - noPageLimit(bool | default = false): set a no page limit so that you get all records from collection (does a series of requests using the pagesize as its limit for each request)
@@ -38,7 +38,7 @@ client.getModels().then(({mycollection: MyCollection}) => {
 }); 
 ```
 
-###client.getModel(name, options{})
+### client.getModel(name, options{})
 This method targets a collection explicitly
 - (Required) name: The name of the collection you want to target
 - options(object):
