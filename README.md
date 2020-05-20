@@ -80,7 +80,8 @@ Supported sub-methods
 - [noPageLimit](#nopagelimitval--true--false-default-true)
 
 ### create(document = object | array, [options](#options){})
-This method creates a record or a list of records in a target collection
+This method creates a record or a list of records in a target collection.
+If the create method is called on a collection that doesnt exist yet, then it will create the collection then create the record.
 ```javascript
 (async () => {
     const response = await MyCollection.create({field1: "someValue"}).catch(err => {
