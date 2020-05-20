@@ -14,7 +14,7 @@ options can be passed in on all levels of the package
     - created_at(bool | number | string default = true): sets a created_at timestamp when a record is created, you can change the name of the field by providing a string instead of a bool or number 
     - updated_at(bool | number | string default = true): sets a updated_at timestamp when a record is created or updated, you can change the name of the field by providing a string instead of a bool or number 
 
-RestHeartClient(params{})
+### RestHeartClient(params{})
 - params:
     - token(string): used to authenticate to restheart
     - (Required) baseUrl(string): the url to where restheart is exposed
