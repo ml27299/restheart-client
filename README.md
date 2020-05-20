@@ -10,15 +10,15 @@ Supports >=node@4.x.x
 options can be passed in on all levels of the package
 - **noPageLimit(bool | default = false):** set a no page limit so that you get all records from collection (does a series of requests using the pagesize as its limit for each request)
 - **pagesize(number | default = 100):** set the max number of records the client will get at once
-- timestamps(object):
+- **timestamps(object):**
     - **created_at(bool | number | string default = true):** sets a created_at timestamp when a record is created, you can change the name of the field by providing a string instead of a bool or number 
     - **updated_at(bool | number | string default = true):** sets a updated_at timestamp when a record is created or updated, you can change the name of the field by providing a string instead of a bool or number 
 
 ### RestHeartClient(params{})
 - params:
-    - token(string): used to authenticate to restheart
-    - (Required) baseUrl(string): the url to where restheart is exposed
-    - database(string | default = "http://localhost"): the name of the database in restheart you want to target
+    - **token(string):** used to authenticate to restheart
+    - **(Required) baseUrl(string):** the url to where restheart is exposed
+    - **database(string | default = "http://localhost"):** the name of the database in restheart you want to target
     - [options](#options)
 ```javascript
 import RestHeartClient from "restheart-client";
@@ -39,7 +39,7 @@ client.getModels().then(({mycollection: MyCollection}) => {
 
 ### client.getModel(name, [options](#options){})
 This method targets a collection explicitly
-- (Required) name(string): The name of the collection you want to target
+- **(Required) name(string):** The name of the collection you want to target
 ```javascript
 const MyCollection = client.getModel("mycollection");
 //do stuff with MyCollection
