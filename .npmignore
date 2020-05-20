@@ -2,3 +2,4 @@ src
 webpack.config.js
 test
 docker-compose.yml
+.idea
