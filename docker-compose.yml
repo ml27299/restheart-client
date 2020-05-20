@@ -1,6 +1,7 @@
 version: "2"
+
 services:
-  
+
 #  mongo:
 #    image: mongo:3.6
 #    ports:
@@ -10,6 +11,8 @@ services:
 #      - ./test/resources/mongo/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
 
   restheart:
+    build:
+      network: host
     image: softinstigate/restheart:3.10.0
 #    depends_on:
 #      - mongo
