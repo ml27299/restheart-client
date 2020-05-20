@@ -45,17 +45,9 @@ This method targets a collection explicitly
 const MyCollection = client.getModel("mycollection");
 /*...do stuff with MyCollection*/
 ```
-## Methods
+## Methods (examples in async/await but promises work too)
 ### findOne(query{}, [options](#options){})
 This method returns a single record from a collection
-```javascript
-MyCollection.findOne({_id: "someObjectId"}).then(response => {
-    /*...do something with the response*/
-}).catch(err => {
-    /*...do something on error*/
-});
-```
-async/await
 ```javascript
 (async () => {
     await MyCollection.findOne().catch(err => {
@@ -67,16 +59,8 @@ async/await
 #### raw(val = (true | false) default = true)
 Chain findOne with raw to return the record without any serialization
 ```javascript
-MyCollection.findOne({_id: "someObjectId"}).raw().then(response => {
-    /*...do something with the response*/
-}).catch(err => {
-    /*...do something on error*/
-});
-```
-async/await
-```javascript
 (async () => {
-    await MyCollection.findOne().raw().catch(err => {
+    await MyCollection.findOne({_id: "someObjectId"}).raw().catch(err => {
         /*...do something on error*/
     });
     /*...do something with the response*/
@@ -85,16 +69,8 @@ async/await
 #### select(val = string | object)
 Chain findOne with select to return the record with only certain fields
 ```javascript
-MyCollection.findOne({_id: "someObjectId"}).select("field1 field2").then(response => {
-    /*...do something with the response*/
-}).catch(err => {
-    /*...do something on error*/
-});
-```
-async/await
-```javascript
 (async () => {
-    await MyCollection.findOne().select({field1: 1, field2: 1}).catch(err => {
+    await MyCollection.findOne({_id: "someObjectId"}).select({field1: 1, field2: 1}).catch(err => {
         /*...do something on error*/
     });
     /*...do something with the response*/
@@ -104,7 +80,38 @@ can also chain with raw
 
 ```javascript
 (async () => {
-    await MyCollection.findOne().select({field1: 1, field2: 1}).raw().catch(err => {
+    await MyCollection.findOne({_id: "someObjectId"}).select({field1: 1, field2: 1}).raw().catch(err => {
+        /*...do something on error*/
+    });
+    /*...do something with the response*/
+})();
+```
+### find(query{}, [options](#options){})
+This method returns a list of records from a collection
+```javascript
+(async () => {
+    await MyCollection.find().catch(err => {
+        /*...do something on error*/
+    });
+    /*...do something with the response*/
+})();
+```
+
+#### raw(val = (true | false) default = true)
+Chain findOne with raw to return the record without any serialization
+```javascript
+(async () => {
+    await MyCollection.find().raw().catch(err => {
+        /*...do something on error*/
+    });
+    /*...do something with the response*/
+})();
+```
+#### select(val = string | object)
+Chain findOne with select to return the record with only certain fields
+```javascript
+(async () => {
+    await MyCollection.find().select({field1: 1, field2: 1}).catch(err => {
         /*...do something on error*/
     });
     /*...do something with the response*/
