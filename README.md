@@ -7,7 +7,7 @@ This package also aims to optimize working with Restheart by
 - handles the dirty work with edge cases such as creating a record on a non existent collection
 - serialize objectIds to strings
 - add methods like limit/skip
-- ability to get all records from collection
+- ability to get all records from a collection
 
 Supports >=node@4.x.x
 
