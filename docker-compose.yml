@@ -1,19 +1,18 @@
 version: "2"
-
 services:
 
-#  mongo:
-#    image: mongo:3.6
-#    ports:
-#      - "49207:27017"
-#    volumes:
-#      - ./test/resources/mongo:/opt/mongo
-#      - ./test/resources/mongo/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
+  mongo:
+    image: mongo:3.6
+    ports:
+      - "49207:27017"
+    volumes:
+      - ./test/resources/mongo:/opt/mongo
+      - ./test/resources/mongo/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
 
   restheart:
     image: softinstigate/restheart:3.10.0
-#    depends_on:
-#      - mongo
+    depends_on:
+      - mongo
     volumes:
       - ./test/resources/restheart/v3/config.properties:/opt/restheart/etc/config.properties
       - ./test/resources/restheart/v3/restheart.yml:/opt/restheart/etc/restheart.yml
