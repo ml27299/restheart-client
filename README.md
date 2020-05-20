@@ -114,6 +114,18 @@ If query is an array, then a bulk update will be done, which means each record i
 Supported sub-methods
 - none
 
+### remove(document{}, [options](#options){})
+This method removes a record or a list of records in a target collection
+```javascript
+(async () => {
+    await MyCollection.remove({field1: "someValue"}).catch(err => {
+        /*...do something on error*/
+    });
+    /*...do something with the response*/
+})();
+```
+Supported sub-methods
+- none
 
 ## Sub-Methods (examples in async/await but promises work too)
 sub-methods can be chained
