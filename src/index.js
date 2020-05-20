@@ -31,7 +31,7 @@ class MongooseClient extends MongoRest {
         }
     }
 
-    getModel(name, options = {}) {
+    getModel(name = required`name`, options = {}) {
         if (!name) throw(new Error("Model name is required"));
         return new Template(name, this, Object.assign(this.options, options));
     }
