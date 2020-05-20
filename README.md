@@ -1,7 +1,13 @@
 # Introduction
 Restheart is a popular mongo rest api, this package aims to make it easier to use by abstracting the endpoints to mongoose-like methods.
 
-This package also aims to optimize working with Restheart by providing automatic timeout and retry handling.
+This package also aims to optimize working with Restheart by
+- automated timeout/retry handling
+- encapsulate http endpoints to more relatable functions
+- handles the dirty work with edge cases such as creating a record on a non existent collection
+- serialize objectIds to strings
+- add methods like limit/skip
+- ability to get all records from collection
 
 Supports >=node@4.x.x
 

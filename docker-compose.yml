@@ -14,7 +14,7 @@ services:
     depends_on:
       - mongo
     volumes:
-      - ./test/resources/restheart/config.properties:/opt/restheart/etc/config.properties
-      - ./test/resources/restheart/restheart.yml:/opt/restheart/etc/restheart.yml
+      - ./test/resources/restheart/v3/config.properties:/opt/restheart/etc/config.properties
+      - ./test/resources/restheart/v3/restheart.yml:/opt/restheart/etc/restheart.yml
     ports:
       - "5151:8080"
