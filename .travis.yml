@@ -9,6 +9,7 @@ before_script:
   - docker-compose up -d
   - npm link
   - npm link restheart-client
+  - npm run build:prod
 
 install: true
 
