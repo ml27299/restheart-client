@@ -114,6 +114,19 @@ Supported sub-methods
 - [page](#pagenum--number-default--1)
 - [noPageLimit](#nopagelimitval--true--false-default-true)
 
+### count(query{}, [options](#options){})
+This method returns the count of a target collection
+```javascript
+(async () => {
+    await MyCollection.count({field1: "someValue"}).catch(err => {
+        /*...do something on error*/
+    });
+    /*...do something with the response*/
+})();
+```
+Supported sub-methods
+- none
+
 ### create(document = object | array, [options](#options){})
 This method creates a record or a list of records in a target collection.
 If the create method is called on a collection that doesnt exist yet, then it will create the collection then create the record.
