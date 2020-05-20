@@ -73,13 +73,18 @@ This method returns a list of records from a collection
 Supported sub-methods
 - [select](#selectval--string--object)
 - [raw](#rawval--true--false-default--true)
-
+- [limit](#limitnum--number-default--0)
+- [skip](#skipnum--number-default--0)
+- [sort](#sortval--)
+- [noPageLimit](#nopagelimitval--true--false-default-true)
 ## Sub-Methods (examples in async/await but promises work too)
+sub-methods can be chained
+
 ### raw(val = (true | false) default = true)
 Call the raw method when you want to return the response without serialization, which means objectids look like {"$oid": "someObjectId"}
 ```javascript
 (async () => {
-    const response = await MyCollection.findOne().raw();
+    const response = await MyCollection.findOne({_id: "someObjectId"}).raw();
     console.log(response); //{_id: {"$oid": "someObjectId"}, ...}
 })();
 ```
@@ -90,7 +95,7 @@ Call the select method when you want select fields only (_id is always returned 
     const response = await MyCollection.find().select("field1 field2"); 
     console.log(response); //[{_id: "someObjectId", field1: "someVal", field2: "otherValue"}  ...}]
     //alternatively
-    await MyCollection.find().select({field1: 1, field2: 1});
+    await MyCollection.findOne({_id: "someObjectId"}).select({field1: 1, field2: 1});
 })();
 ```
 ### skip(num = number default = 0)
@@ -99,5 +104,30 @@ If there're more rows in a collection than the set "pagesize" then the skip meth
 ```javascript
 (async () => {
     await MyCollection.find().skip(10);
+})();
+```
+### limit(num = number default = 0)
+Call the limit method to control how many results to return in the response.
+If the limit number is greater than the pagesize, then multiple calls will be made to reach the limit
+```javascript
+(async () => {
+    await MyCollection.find().limit(10);
+})();
+```
+### sort(val = {})
+Call the sort method when you want to return the records sorted by some field
+```javascript
+(async () => {
+    await MyCollection.find().sort({field: 1}); //ascending order
+})();
+```
+### noPageLimit(val = (true | false) default true)
+Call the noPageLimit method when you want to return all records in a collection.
+If there're more records in the collection than the set "pagesize" then multiple requests will be made
+```javascript
+(async () => {
+    const count = await MyCollection.count();
+    const response = await MyCollection.find().noPageLimit();
+    console.log(response.length === count) //true
 })();
 ```
