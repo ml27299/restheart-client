@@ -10,6 +10,7 @@ Supports >=node@4.x.x
 options can be passed in on all levels of the package
 - **noPageLimit(bool | default = false):** set a no page limit so that you get all records from collection (does a series of requests using the pagesize as its limit for each request)
 - **pagesize(number | default = 100):** set the max number of records the client will get at once
+- **raw(bool | default = false):** returns records as restheart returns records (with $oid on object ids) 
 - **timestamps(object):**
     - **created_at(bool | number | string default = true):** sets a created_at timestamp when a record is created, you can change the name of the field by providing a string instead of a bool or number 
     - **updated_at(bool | number | string default = true):** sets a updated_at timestamp when a record is created or updated, you can change the name of the field by providing a string instead of a bool or number 
@@ -33,7 +34,7 @@ const client = new RestHeartClient({
 This method implicitly figures out the collections in your database by making a request to restheart
 ```javascript
 client.getModels().then(({mycollection: MyCollection}) => {
-    //...do stuff with MyCollection
+    /*...do stuff with MyCollection*/
 }); 
 ```
 
@@ -42,7 +43,46 @@ This method targets a collection explicitly
 - **(Required) name(string):** The name of the collection you want to target
 ```javascript
 const MyCollection = client.getModel("mycollection");
-//do stuff with MyCollection
+/*...do stuff with MyCollection*/
 ```
-
-
+## Methods
+### findOne(query{}, [options](#options){})
+This method returns a single record from a collection
+```javascript
+MyCollection.findOne({_id: "someObjectId"}).then(response => {
+    /*...do something with the response*/
+}).catch(err => {
+    /*...do something on error*/
+});
+```
+async/await
+```javascript
+(async () => {
+    try {
+        await MyCollection.findOne();
+        /*...do something with the response*/
+    }catch(err) {
+        /*...do something on error*/
+    }   
+})();
+```
+#### raw(val = true | false, default = true)
+Chain findOne with raw to return the record without any serialization
+```javascript
+MyCollection.findOne({_id: "someObjectId"}).raw().then(response => {
+    /*...do something with the response*/
+}).catch(err => {
+    /*...do something on error*/
+});
+```
+async/await
+```javascript
+(async () => {
+    try {
+        await MyCollection.findOne().raw();
+        /*...do something with the response*/
+    }catch(err) {
+        /*...do something on error*/
+    }   
+})();
+```
