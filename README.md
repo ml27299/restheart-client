@@ -58,12 +58,10 @@ MyCollection.findOne({_id: "someObjectId"}).then(response => {
 async/await
 ```javascript
 (async () => {
-    try {
-        await MyCollection.findOne();
-        /*...do something with the response*/
-    }catch(err) {
+    await MyCollection.findOne().catch(err => {
         /*...do something on error*/
-    }   
+    });
+    /*...do something with the response*/
 })();
 ```
 #### raw(val = true | false, default = true)
@@ -78,11 +76,9 @@ MyCollection.findOne({_id: "someObjectId"}).raw().then(response => {
 async/await
 ```javascript
 (async () => {
-    try {
-        await MyCollection.findOne().raw();
-        /*...do something with the response*/
-    }catch(err) {
+    await MyCollection.findOne().raw().catch(err => {
         /*...do something on error*/
-    }   
+    });
+    /*...do something with the response*/
 })();
 ```
