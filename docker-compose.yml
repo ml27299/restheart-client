@@ -9,16 +9,10 @@ services:
       - ./test/resources/mongo:/opt/mongo
       - ./test/resources/mongo/restore.sh:/docker-entrypoint-initdb.d/restore.sh:ro
 
-  sleep10:
-    image: alpine:latest
-    depends_on:
-      - mongo
-    command: "sleep 10"
-
   restheart:
     image: softinstigate/restheart:3.10.0
     depends_on:
-      - sleep10
+      - mongo
     volumes:
       - ./test/resources/restheart/v3/config.properties:/opt/restheart/etc/config.properties
       - ./test/resources/restheart/v3/restheart.yml:/opt/restheart/etc/restheart.yml
