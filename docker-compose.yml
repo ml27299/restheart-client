@@ -1,6 +1,5 @@
 version: "2"
 services:
-
   mongo:
     image: mongo:3.6
     ports:
