@@ -64,7 +64,7 @@ async/await
     /*...do something with the response*/
 })();
 ```
-#### raw(val = true | false, default = true)
+#### raw(val = (true | false) default = true)
 Chain findOne with raw to return the record without any serialization
 ```javascript
 MyCollection.findOne({_id: "someObjectId"}).raw().then(response => {
