@@ -6,7 +6,7 @@ module.exports = [
         entry: "./src/index.js",
         target: "node",
         optimization: {
-            minimize: false
+            minimize: true
         },
         externals: [nodeExternals()],
         module: {
