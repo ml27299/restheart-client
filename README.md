@@ -82,3 +82,31 @@ async/await
     /*...do something with the response*/
 })();
 ```
+#### select(val = string | object)
+Chain findOne with select to return the record with only certain fields
+```javascript
+MyCollection.findOne({_id: "someObjectId"}).select("field1 field2").then(response => {
+    /*...do something with the response*/
+}).catch(err => {
+    /*...do something on error*/
+});
+```
+async/await
+```javascript
+(async () => {
+    await MyCollection.findOne().select({field1: 1, field2: 1}).catch(err => {
+        /*...do something on error*/
+    });
+    /*...do something with the response*/
+})();
+```
+can also chain with raw
+
+```javascript
+(async () => {
+    await MyCollection.findOne().select({field1: 1, field2: 1}).raw().catch(err => {
+        /*...do something on error*/
+    });
+    /*...do something with the response*/
+})();
+```
